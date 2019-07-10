@@ -13,7 +13,7 @@
     </style>
 
     <style name="SplashTheme2" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/siapplogo</item>
+        <item name="android:windowBackground">@drawable/si_logo4</item>
     </style>
 
     <style name="FullscreenTheme" parent="AppTheme">
