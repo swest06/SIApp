@@ -18,8 +18,8 @@ class SplashScreenActivity : AppCompatActivity() {
                 try{
                     Thread.sleep(5000)
 
-                    val intent = Intent(baseContext, MainActivity::class.java)
-//                    val intent = Intent(this, MainActivity::class.java)
+//                    val intent = Intent(baseContext, MainActivity::class.java)
+                    val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
                     startActivity(intent)
                 } catch (e: Exception){
                     e.printStackTrace()

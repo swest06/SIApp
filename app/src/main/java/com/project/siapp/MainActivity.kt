@@ -1,11 +1,13 @@
 package com.project.siapp
 
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
 //import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 //import android.support.constraint.ConstraintLayout
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -14,21 +16,26 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.firebase.auth.FirebaseAuth
+import com.project.siapp.animateBackground
+import android.graphics.PorterDuff
+
+
 
 class MainActivity : AppCompatActivity() {
-
     private val TAG = "MainActivity"
+    private val register by lazy { findViewById<Button>(R.id.register_button) }
+    private val loginLink by lazy { findViewById<TextView>(R.id.login_link) }
+    private val constraintLayout by lazy { findViewById<ConstraintLayout>(R.id.layout) }
+    private lateinit var email: String
+    private lateinit var password: String
+    private lateinit var toast: Toast
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        
-        //Animated gradient background
-        animateBackground()
 
-        //Assign views to constants
-        val register = findViewById<Button>(R.id.register_button)
-        val loginLink = findViewById<TextView>(R.id.login_link)
+        //Animated gradient background
+        animateBackground(constraintLayout)
 
         //Register new user
         register.setOnClickListener(object : View.OnClickListener{
@@ -47,32 +54,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    public fun animateBackground(){
-        val constraintLayout: ConstraintLayout = findViewById(R.id.layout)
-        val animationDrawable: AnimationDrawable = constraintLayout.background as AnimationDrawable
-        animationDrawable.setEnterFadeDuration(2000)
-        animationDrawable.setExitFadeDuration(4000)
-        animationDrawable.start()
-    }
-
     private fun registerUser(){
-        val email = (findViewById<EditText>(R.id.email_editText)).text.toString()
-        val password = (findViewById<EditText>(R.id.password_editText)).text.toString()
+        email = (findViewById<EditText>(R.id.email_editText)).text.toString()
+        password = (findViewById<EditText>(R.id.password_editText)).text.toString()
+        toast = getToast(this@MainActivity)
 
         //Check email and password has values
         if  (email.isEmpty()){
-            Toast.makeText(this@MainActivity, "please enter a valid email", Toast.LENGTH_SHORT).show()
-//            return@onClick
+            toast.setText("please enter a valid email")
+            toast.show()
             return@registerUser
 
         } else if (password.isEmpty()) {
-            Toast.makeText(this@MainActivity, "Please enter a valid password", Toast.LENGTH_SHORT).show()
-//            return@onClick
+            toast.setText( "Please enter a valid password")
+            toast.show()
             return@registerUser
 
         } else if(password.length < 6){
-            Toast.makeText(this@MainActivity, "Password must be at least 6 characters long", Toast.LENGTH_SHORT).show()
-//            return@onClick
+            toast.setText("Password should be at least 6 characters long")
+            toast.show()
             return@registerUser
         }
 
