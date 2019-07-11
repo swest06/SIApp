@@ -55,20 +55,21 @@ class LoginActivity: AppCompatActivity() {
      * Tries to login user when they click login button
      */
     private fun loginUser(){
-        email = findViewById<EditText>(R.id.username_editText_login).toString()
-        password = findViewById<EditText>(R.id.password_editText).toString()
+        email = (findViewById<EditText>(R.id.username_editText_login)).text.toString()
+        password = (findViewById<EditText>(R.id.password_editText_login)).text.toString()
         toast = getToast(this@LoginActivity)
 
         //Check username and password strings
         if (email.isEmpty()){
+            Log.d(TAG, "inside email.isEmpty")
             toast.setText("Please enter a username")
             toast.show()
-            return@loginUser
+            return
 
         } else if (password.isEmpty()){
             toast.setText("Please enter a password")
             toast.show()
-            return@loginUser
+            return
         }
 
         //Login User
