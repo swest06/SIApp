@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private val register by lazy { findViewById<Button>(R.id.register_button) }
     private val loginLink by lazy { findViewById<TextView>(R.id.login_link) }
     private val constraintLayout by lazy { findViewById<ConstraintLayout>(R.id.layout) }
+    private lateinit var userName: String
     private lateinit var email: String
     private lateinit var password: String
     private lateinit var toast: Toast
@@ -54,6 +55,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Creates and authenticates new user when register button is clicked
+     */
     private fun registerUser(){
         email = (findViewById<EditText>(R.id.email_editText)).text.toString()
         password = (findViewById<EditText>(R.id.password_editText)).text.toString()
