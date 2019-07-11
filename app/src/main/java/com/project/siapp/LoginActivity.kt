@@ -14,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.firebase.auth.FirebaseAuth
 import com.project.siapp.MainActivity
 import com.project.siapp.animateBackground
 
@@ -23,7 +24,7 @@ class LoginActivity: AppCompatActivity() {
     private val constraintLayout by lazy { findViewById<ConstraintLayout>(R.id.layout) }
     private val login by lazy {findViewById<Button>(R.id.login_button)}
     private val registerLink by lazy { findViewById<TextView>(R.id.register_link) }
-    private lateinit var userName: String
+    private lateinit var email: String
     private lateinit var password: String
     private lateinit var toast: Toast
 
@@ -54,11 +55,12 @@ class LoginActivity: AppCompatActivity() {
      * Tries to login user when they click login button
      */
     private fun loginUser(){
-        userName = findViewById<EditText>(R.id.username_editText_login).toString()
+        email = findViewById<EditText>(R.id.username_editText_login).toString()
         password = findViewById<EditText>(R.id.password_editText).toString()
         toast = getToast(this@LoginActivity)
 
-        if (userName.isEmpty()){
+        //Check username and password strings
+        if (email.isEmpty()){
             toast.setText("Please enter a username")
             toast.show()
             return@loginUser
@@ -69,5 +71,19 @@ class LoginActivity: AppCompatActivity() {
             return@loginUser
         }
 
+        //Login User
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener {
+                    if (!it.isSuccessful){
+                        Log.d(TAG, "Unsuccessful login")
+                        return@addOnCompleteListener
+                    } else{
+                        Log.d(TAG, "Successful login")
+                        Log.d(TAG, "User ID: ${it.result?.user?.uid}")
+                    }
+                }
+                .addOnFailureListener {
+                    Log.d(TAG, "Login failure")
+                }
     }
 }
