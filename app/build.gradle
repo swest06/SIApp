@@ -8,7 +8,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.project.siapp"
-        minSdkVersion 17
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -35,6 +35,13 @@ dependencies {
     //Firebase
     implementation 'com.google.firebase:firebase-core:17.0.0'
     implementation 'com.google.firebase:firebase-auth:18.0.0'
+
+    //Firebase Storage & Database
+    implementation 'com.google.firebase:firebase-storage:18.1.0'
+    implementation 'com.google.firebase:firebase-database:18.0.0'
+
+    //Circle View
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
