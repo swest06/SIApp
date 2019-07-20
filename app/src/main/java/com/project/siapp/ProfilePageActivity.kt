@@ -12,6 +12,8 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.storage.FirebaseStorage
+import java.util.*
 
 class ProfilePageActivity: AppCompatActivity() {
     private val TAG = "ProfilePageActivity"
@@ -64,7 +66,32 @@ class ProfilePageActivity: AppCompatActivity() {
         }
     }
 
-    private fun uploadImage(){
+    /**
+     * Store image in Firebase storage
+     */
+    private fun uploadImage() {
+        //check value
+        if (photoUri == null){
+            toast.setText("Photo could not be uploaded")
+            toast.show()
+            return
+        }
 
+        //Generate unique identifier for photo
+        val filename = UUID.randomUUID().toString()
+
+        //reference to Firebase storage location
+        val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
+
+        //put photo into storage
+        ref.putFile(photoUri!!)
+            .addOnSuccessListener {
+                Log.d(TAG, "Uploaded image Successfully: ${it.metadata?.path}")
+
+                //retrieve file location
+                ref.downloadUrl.addOnSuccessListener {
+                    it.toString()
+                }
+            }
     }
 }
