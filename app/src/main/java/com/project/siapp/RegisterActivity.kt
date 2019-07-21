@@ -115,9 +115,11 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun saveUser(){
+        //create db entry with user id
         val uid = FirebaseAuth.getInstance().uid?:""
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
 
+        //store user as object and save to db
         val user = User(uid, name)
         ref.setValue(user)
             .addOnSuccessListener {

@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.storage.FirebaseStorage
+import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
 
 class ProfilePageActivity: AppCompatActivity() {
@@ -21,6 +22,7 @@ class ProfilePageActivity: AppCompatActivity() {
     private val inbox_button by lazy { findViewById<Button>(R.id.inbox_button_profile_page) }
     private val search_button by lazy { findViewById<Button>(R.id.search_button_profile_page) }
     private val name_view by lazy { findViewById<TextView>(R.id.name_edit_text_profile_page) }
+    private val circleImage by lazy { findViewById<CircleImageView>(R.id.circle_image_view_profile) }
     private lateinit var toast: Toast
     var photoUri: Uri? = null
 
@@ -61,8 +63,13 @@ class ProfilePageActivity: AppCompatActivity() {
 
             //Save image as bitmap and set as background within placeholder(Button)
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, photoUri)
-            val bitmapDrawable = BitmapDrawable(bitmap)
-            photo_button.setBackgroundDrawable(bitmapDrawable)
+            circleImage.setImageBitmap(bitmap)
+
+            //hide button after image upload
+            photo_button.alpha = 0f
+
+//            val bitmapDrawable = BitmapDrawable(bitmap)
+//            photo_button.setBackgroundDrawable(bitmapDrawable)
         }
     }
 
@@ -90,6 +97,7 @@ class ProfilePageActivity: AppCompatActivity() {
 
                 //retrieve file location
                 ref.downloadUrl.addOnSuccessListener {
+                    Log.d(TAG, "Storage location $it")
                     it.toString()
                 }
             }

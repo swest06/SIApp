@@ -34,7 +34,7 @@
     <Button
         android:id="@+id/photo_button_profile_page"
         android:layout_width="160dp"
-        android:layout_height="156dp"
+        android:layout_height="160dp"
         android:layout_marginTop="208dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/rounded_image"
@@ -154,6 +154,18 @@
         app:layout_constraintEnd_toEndOf="@+id/name_edit_text_profile_page"
         app:layout_constraintStart_toStartOf="@+id/name_edit_text_profile_page"
         app:layout_constraintTop_toBottomOf="@+id/name_edit_text_profile_page" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            app:civ_border_width="4dp"
+            app:civ_border_color="#ffffff"
+            app:layout_constraintEnd_toEndOf="@+id/photo_button_profile_page"
+            app:layout_constraintStart_toStartOf="@+id/photo_button_profile_page"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintTop_toTopOf="@+id/photo_button_profile_page"
+            app:layout_constraintBottom_toBottomOf="@id/photo_button_profile_page"
+            android:id="@+id/circle_image_view_profile"/>
 
     <!--Photo-->
     <!--<ImageView-->
