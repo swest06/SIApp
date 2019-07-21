@@ -69,17 +69,21 @@ class LoginActivity: AppCompatActivity() {
 
         //Login User
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener {
-                    if (!it.isSuccessful){
-                        Log.d(TAG, "Unsuccessful login")
-                        return@addOnCompleteListener
-                    } else{
-                        Log.d(TAG, "Successful login")
-                        Log.d(TAG, "User ID: ${it.result?.user?.uid}")
-                    }
+            .addOnCompleteListener {
+                if (!it.isSuccessful){
+                    Log.d(TAG, "Unsuccessful login")
+                    return@addOnCompleteListener
+                } else{
+                    Log.d(TAG, "Successful login")
+                    Log.d(TAG, "User ID: ${it.result?.user?.uid}")
+
+                    //Go to user's profile page
+                    val intent = Intent(this, ProfilePageActivity::class.java)
+                    startActivity(intent)
                 }
-                .addOnFailureListener {
-                    Log.d(TAG, "Login failure")
-                }
+            }
+            .addOnFailureListener {
+                Log.d(TAG, "Login failure")
+            }
     }
 }
