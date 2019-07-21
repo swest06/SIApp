@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -58,8 +59,13 @@ class RegisterActivity : AppCompatActivity() {
         password = (findViewById<EditText>(R.id.password_editText)).text.toString()
         toast = getToast(this@RegisterActivity)
 
-        //Check email and password has values
-        if  (email.isEmpty()){
+        //Check name, email and password has values
+        if (name.isEmpty()) {
+            toast.setText("What is your name?")
+            toast.show()
+            return
+
+        }else if  (email.isEmpty()){
             toast.setText("please enter a valid email")
             toast.show()
             return@registerUser
@@ -78,6 +84,8 @@ class RegisterActivity : AppCompatActivity() {
         //test login with Logs
         Log.d(TAG, "Email is: $email")
         Log.d(TAG, "Password is: $password")
+        toast.setText("Register unsuccessful. \n" +
+                "Please try again or restart app")
 
         //Firebase Authentication for new user
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
@@ -85,14 +93,39 @@ class RegisterActivity : AppCompatActivity() {
                 Log.d(TAG, "Inside 'createUserWithEmailAndPassword(email, password)'")
                 if (!it.isSuccessful) {
                     Log.d(TAG, "Unsuccessful")
+                    toast.show()
                     return@addOnCompleteListener
                 } else {
                     Log.d(TAG, "Successful")
                     Log.d(TAG, "New user created \n User ID: ${it.result?.user?.uid}")
+
+                    //Save user to Firebase db
+                    saveUser()
+
+                    //Go to user's profile page
+                    val intent = Intent(this, ProfilePageActivity::class.java)
+                    startActivity(intent)
                 }
             }
             .addOnFailureListener{
                 Log.d(TAG, "Register failure \n user: ${it.message}")
+                toast.show()
+                return@addOnFailureListener
             }
     }
+
+    private fun saveUser(){
+        val uid = FirebaseAuth.getInstance().uid?:""
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+
+        val user = User(uid, name)
+        ref.setValue(user)
+            .addOnSuccessListener {
+                Log.d(TAG, "User was saved to Firebase")
+            }
+            .addOnFailureListener {
+                Log.d(TAG, "Failed to save user to Firebase")
+            }
+    }
+
 }
