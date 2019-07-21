@@ -1,7 +1,6 @@
 package com.project.siapp
 
 import android.content.Intent
-import android.graphics.drawable.AnimationDrawable
 //import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -18,8 +17,8 @@ class SplashScreenActivity : AppCompatActivity() {
                 try{
                     Thread.sleep(5000)
 
-//                    val intent = Intent(baseContext, MainActivity::class.java)
-                    val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
+//                    val intent = Intent(baseContext, RegisterActivity::class.java)
+                    val intent = Intent(this@SplashScreenActivity, RegisterActivity::class.java)
                     startActivity(intent)
                 } catch (e: Exception){
                     e.printStackTrace()

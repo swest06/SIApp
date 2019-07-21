@@ -1,13 +1,10 @@
 package com.project.siapp
 
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.AnimationDrawable
 //import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 //import android.support.constraint.ConstraintLayout
 import android.util.Log
-import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -16,13 +13,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.firebase.auth.FirebaseAuth
-import com.project.siapp.animateBackground
-import android.graphics.PorterDuff
 
 
-
-class MainActivity : AppCompatActivity() {
-    private val TAG = "MainActivity"
+class RegisterActivity : AppCompatActivity() {
+    private val TAG = "RegisterActivity"
     private val register by lazy { findViewById<Button>(R.id.register_button) }
     private val loginLink by lazy { findViewById<TextView>(R.id.login_link) }
     private val constraintLayout by lazy { findViewById<ConstraintLayout>(R.id.layout) }
@@ -61,7 +55,7 @@ class MainActivity : AppCompatActivity() {
     private fun registerUser(){
         email = (findViewById<EditText>(R.id.email_editText)).text.toString()
         password = (findViewById<EditText>(R.id.password_editText)).text.toString()
-        toast = getToast(this@MainActivity)
+        toast = getToast(this@RegisterActivity)
 
         //Check email and password has values
         if  (email.isEmpty()){
