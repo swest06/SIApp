@@ -50,7 +50,7 @@ class LoginActivity: AppCompatActivity() {
      * Tries to login user when they click login button
      */
     private fun loginUser(){
-        email = (findViewById<EditText>(R.id.username_editText_login)).text.toString()
+        email = (findViewById<EditText>(R.id.name_editText_register)).text.toString()
         password = (findViewById<EditText>(R.id.password_editText_login)).text.toString()
         toast = getToast(this@LoginActivity)
 
