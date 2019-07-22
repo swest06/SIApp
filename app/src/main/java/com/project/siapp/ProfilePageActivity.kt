@@ -34,26 +34,15 @@ class ProfilePageActivity: AppCompatActivity() {
         toast = getToast(this@ProfilePageActivity)
 
 
-        //CODE FOR LAUNCHING REGISTER PAGE WHEN USER IS NOT LOGGED IN (NEEDS REFACTORING!)
-//        val uid = FirebaseAuth.getInstance().uid
-//        if (uid == null){
-//            val intent = Intent(this, RegisterActivity::class.java)
-//            startActivity(intent)
-//        }
+        //CODE FOR LAUNCHING REGISTER PAGE WHEN USER IS NOT LOGGED IN. Uncomment when launcher intent filter is added to manifest xml
+        //loginCheck()
 
         //Photo Button
         photo_button.setOnClickListener {
-            Log.d(TAG, "photo button clicked")
-
-            //bring up photo selector
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            startActivityForResult(intent, 0)
-
-            //Upload image to Firebase Storage
-            uploadImage()
+            photoButton()
         }
     }
+
 
     /**
      * Called when the intent(photo selector) has finished.
@@ -110,5 +99,26 @@ class ProfilePageActivity: AppCompatActivity() {
                     it.toString()
                 }
             }
+    }
+
+    private fun photoButton(){
+        Log.d(TAG, "photo button clicked")
+
+        //bring up photo selector
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, 0)
+
+        //Upload image to Firebase Storage
+        uploadImage()
+    }
+
+    private fun loginCheck(){
+        val uid = FirebaseAuth.getInstance().uid
+        if (uid == null){
+            val intent = Intent(this, RegisterActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
     }
 }
