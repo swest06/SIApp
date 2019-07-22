@@ -24,6 +24,7 @@ class ProfilePageActivity: AppCompatActivity() {
     private val search_button by lazy { findViewById<Button>(R.id.search_button_profile_page) }
     private val name_view by lazy { findViewById<TextView>(R.id.name_edit_text_profile_page) }
     private val circleImage by lazy { findViewById<CircleImageView>(R.id.circle_image_view_profile) }
+    private val signOutButton by lazy { findViewById<Button>(R.id.sign_out_profile_page) }
     private lateinit var toast: Toast
     var photoUri: Uri? = null
 
@@ -40,6 +41,11 @@ class ProfilePageActivity: AppCompatActivity() {
         //Photo Button
         photo_button.setOnClickListener {
             photoButton()
+        }
+
+        //Sign Out Button
+        signOutButton.setOnClickListener {
+            signOut()
         }
     }
 
@@ -101,6 +107,9 @@ class ProfilePageActivity: AppCompatActivity() {
             }
     }
 
+    /**
+     * When user wants to upload photo
+     */
     private fun photoButton(){
         Log.d(TAG, "photo button clicked")
 
@@ -113,6 +122,9 @@ class ProfilePageActivity: AppCompatActivity() {
         uploadImage()
     }
 
+    /**
+     * Checks if a user is already logged in when launching app
+     */
     private fun loginCheck(){
         val uid = FirebaseAuth.getInstance().uid
         if (uid == null){
@@ -120,5 +132,14 @@ class ProfilePageActivity: AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
+    }
+
+    /**
+     * Signs out user
+     */
+    private fun signOut(){
+        FirebaseAuth.getInstance().signOut()
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
     }
 }

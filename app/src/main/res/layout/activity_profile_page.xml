@@ -167,6 +167,15 @@
             app:layout_constraintTop_toTopOf="@+id/photo_button_profile_page"
             app:layout_constraintBottom_toBottomOf="@id/photo_button_profile_page"
             android:id="@+id/circle_image_view_profile"/>
+    <Button
+            android:text="Sign Out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/profile_buttons1"
+            android:textColor="#ffffff"
+            android:id="@+id/sign_out_profile_page" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"/>
 
     <!--Photo-->
     <!--<ImageView-->
