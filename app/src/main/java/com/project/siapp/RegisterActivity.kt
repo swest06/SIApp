@@ -101,10 +101,6 @@ class RegisterActivity : AppCompatActivity() {
 
                     //Save user to Firebase db
                     saveUser()
-
-                    //Go to user's profile page
-                    val intent = Intent(this, ProfilePageActivity::class.java)
-                    startActivity(intent)
                 }
             }
             .addOnFailureListener{
@@ -124,6 +120,13 @@ class RegisterActivity : AppCompatActivity() {
         ref.setValue(user)
             .addOnSuccessListener {
                 Log.d(TAG, "User was saved to Firebase")
+
+                //Go to user's profile page
+                val intent = Intent(this, ProfilePageActivity::class.java)
+
+                //Clear other activites from the stack
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
             }
             .addOnFailureListener {
                 Log.d(TAG, "Failed to save user to Firebase")
