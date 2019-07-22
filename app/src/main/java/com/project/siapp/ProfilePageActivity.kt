@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
@@ -31,6 +32,14 @@ class ProfilePageActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_page)
         toast = getToast(this@ProfilePageActivity)
+
+
+        //CODE FOR LAUNCHING REGISTER PAGE WHEN USER IS NOT LOGGED IN (NEEDS REFACTORING!)
+//        val uid = FirebaseAuth.getInstance().uid
+//        if (uid == null){
+//            val intent = Intent(this, RegisterActivity::class.java)
+//            startActivity(intent)
+//        }
 
         //Photo Button
         photo_button.setOnClickListener {

@@ -47,29 +47,30 @@
         app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
     <Button
-        android:id="@+id/inbox_button_profile_page"
-        android:layout_width="202dp"
-        android:layout_height="0dp"
-        android:paddingRight="32dp"
-        android:text="INBOX"
-        android:textColor="#ffffff"
-        android:background="@drawable/profile_buttons1"
-        app:layout_constraintBottom_toBottomOf="@+id/photo_button_profile_page"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5"
-        app:layout_constraintVertical_bias="1.0" />
+            android:id="@+id/inbox_button_profile_page"
+            android:layout_width="202dp"
+            android:layout_height="0dp"
+            android:paddingRight="32dp"
+            android:text="INBOX"
+            android:textColor="#ffffff"
+            android:background="@drawable/profile_buttons1"
+            app:layout_constraintBottom_toBottomOf="@+id/photo_button_profile_page"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5"
+            app:layout_constraintVertical_bias="1.0"/>
 
     <Button
-        android:id="@+id/search_button_profile_page"
-        android:layout_width="0dp"
-        android:layout_height="77dp"
-        android:background="@drawable/profile_buttons1"
-        android:paddingLeft="32dp"
-        android:text="SEARCH"
-        android:textColor="#ffffff"
-        app:layout_constraintBaseline_toBaselineOf="@+id/inbox_button_profile_page"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/inbox_button_profile_page" />
+            android:id="@+id/search_button_profile_page"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/profile_buttons1"
+            android:paddingLeft="32dp"
+            android:text="SEARCH"
+            android:textColor="#ffffff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/inbox_button_profile_page"
+            app:layout_constraintTop_toBottomOf="@+id/imageView4"
+            app:layout_constraintBottom_toBottomOf="@+id/inbox_button_profile_page"/>
 
     <TextView
         android:id="@+id/name_edit_text_profile_page"
