@@ -1,9 +1,9 @@
 package com.project.siapp;
 
 public class User {
-    String uid;
-    String name;
-    String photo;
+    public String uid;
+    public String name;
+    public String photo;
 
     public User(String uid, String name){
         this.uid = uid;

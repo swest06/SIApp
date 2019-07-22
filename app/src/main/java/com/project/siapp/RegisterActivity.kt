@@ -117,6 +117,8 @@ class RegisterActivity : AppCompatActivity() {
 
         //store user as object and save to db
         val user = User(uid, name)
+        Log.d(TAG,"uid: ${user.uid} \n name: ${user.name}")
+
         ref.setValue(user)
             .addOnSuccessListener {
                 Log.d(TAG, "User was saved to Firebase")
