@@ -8,5 +8,6 @@ class InboxActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inbox)
+        supportActionBar?.title = "Inbox"
     }
 }
