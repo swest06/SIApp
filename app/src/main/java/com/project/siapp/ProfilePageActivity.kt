@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -24,7 +26,7 @@ class ProfilePageActivity: AppCompatActivity() {
     private val searchButton by lazy { findViewById<Button>(R.id.search_button_profile_page) }
     private val nameView by lazy { findViewById<TextView>(R.id.name_edit_text_profile_page) }
     private val circleImage by lazy { findViewById<CircleImageView>(R.id.circle_image_view_profile) }
-    private val signOutButton by lazy { findViewById<Button>(R.id.sign_out_profile_page) }
+//    private val signOutButton by lazy { findViewById<Button>(R.id.sign_out_profile_page) }
     private lateinit var toast: Toast
     var photoUri: Uri? = null
 
@@ -45,9 +47,9 @@ class ProfilePageActivity: AppCompatActivity() {
         }
 
         //Sign Out Button
-        signOutButton.setOnClickListener {
-            signOut()
-        }
+//        signOutButton.setOnClickListener {
+//            signOut()
+//        }
 
         //Inbox Button
         inboxButton.setOnClickListener {
@@ -141,11 +143,27 @@ class ProfilePageActivity: AppCompatActivity() {
     }
 
     /**
+     * Add menu options to action bar
+     */
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.action_bar_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.menu_sign_out){
+            signOut()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    /**
      * Signs out user
      */
     private fun signOut(){
         FirebaseAuth.getInstance().signOut()
         val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }
 
