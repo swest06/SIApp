@@ -32,6 +32,7 @@ class ProfilePageActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_page)
+        supportActionBar?.title = "Profile"
         toast = getToast(this@ProfilePageActivity)
 
 
