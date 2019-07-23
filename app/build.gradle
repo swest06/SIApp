@@ -44,6 +44,11 @@ dependencies {
 
     //Circle View
     implementation 'de.hdodenhof:circleimageview:3.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    
+    //Groupie
+    implementation 'com.xwray:groupie:2.3.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
