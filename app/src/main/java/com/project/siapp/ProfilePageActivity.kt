@@ -19,10 +19,10 @@ import java.util.*
 
 class ProfilePageActivity: AppCompatActivity() {
     private val TAG = "ProfilePageActivity"
-    private val photo_button  by lazy { findViewById<Button>(R.id.photo_button_profile_page) }
-    private val inbox_button by lazy { findViewById<Button>(R.id.inbox_button_profile_page) }
-    private val search_button by lazy { findViewById<Button>(R.id.search_button_profile_page) }
-    private val name_view by lazy { findViewById<TextView>(R.id.name_edit_text_profile_page) }
+    private val photoButton  by lazy { findViewById<Button>(R.id.photo_button_profile_page) }
+    private val inboxButton by lazy { findViewById<Button>(R.id.inbox_button_profile_page) }
+    private val searchButton by lazy { findViewById<Button>(R.id.search_button_profile_page) }
+    private val nameView by lazy { findViewById<TextView>(R.id.name_edit_text_profile_page) }
     private val circleImage by lazy { findViewById<CircleImageView>(R.id.circle_image_view_profile) }
     private val signOutButton by lazy { findViewById<Button>(R.id.sign_out_profile_page) }
     private lateinit var toast: Toast
@@ -39,13 +39,18 @@ class ProfilePageActivity: AppCompatActivity() {
         //loginCheck()
 
         //Photo Button
-        photo_button.setOnClickListener {
+        photoButton.setOnClickListener {
             photoButton()
         }
 
         //Sign Out Button
         signOutButton.setOnClickListener {
             signOut()
+        }
+
+        //Inbox Button
+        inboxButton.setOnClickListener {
+            goToInbox()
         }
     }
 
@@ -70,7 +75,7 @@ class ProfilePageActivity: AppCompatActivity() {
             circleImage.setImageBitmap(bitmap)
 
             //hide button after image upload
-            photo_button.alpha = 0f
+            photoButton.alpha = 0f
 
 //            val bitmapDrawable = BitmapDrawable(bitmap)
 //            photo_button.setBackgroundDrawable(bitmapDrawable)
@@ -140,6 +145,14 @@ class ProfilePageActivity: AppCompatActivity() {
     private fun signOut(){
         FirebaseAuth.getInstance().signOut()
         val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+    }
+
+    /**
+     * Goes to user's inbox
+     */
+    private fun goToInbox(){
+        val intent = Intent(this, InboxActivity::class.java)
         startActivity(intent)
     }
 }
