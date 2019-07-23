@@ -55,6 +55,11 @@ class ProfilePageActivity: AppCompatActivity() {
         inboxButton.setOnClickListener {
             goToInbox()
         }
+
+        //Search Button
+        searchButton.setOnClickListener {
+            searchPage()
+        }
     }
 
 
@@ -172,6 +177,14 @@ class ProfilePageActivity: AppCompatActivity() {
      */
     private fun goToInbox(){
         val intent = Intent(this, InboxActivity::class.java)
+        startActivity(intent)
+    }
+
+    /**
+     * Go to search page
+     */
+    private fun searchPage() {
+        val intent = Intent(this, SearchActivity::class.java)
         startActivity(intent)
     }
 }

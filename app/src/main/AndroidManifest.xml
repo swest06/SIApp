@@ -9,10 +9,17 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".SearchActivity">
+            <!-- Adds back button to action bar -->
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ProfilePageActivity"/>
+        </activity>
         <activity android:name=".InboxActivity">
-            <!--Adds back button to action bar-->
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ProfilePageActivity"></meta-data>
+            <!-- Adds back button to action bar -->
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ProfilePageActivity"/>
         </activity>
         <activity android:name=".RegisterActivity">
 
