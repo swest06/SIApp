@@ -15,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.storage.FirebaseStorage
 import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
@@ -60,6 +61,23 @@ class ProfilePageActivity: AppCompatActivity() {
         searchButton.setOnClickListener {
             searchPage()
         }
+    }
+
+    /**
+     * When user wants to upload photo
+     */
+    private fun photoButton(){
+        Log.d(TAG, "photo button clicked")
+
+        //bring up photo selector
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+
+        //goes to onActivityResult()
+        startActivityForResult(intent, 0)
+
+        //Upload image to Firebase Storage
+        uploadImage()
     }
 
 
@@ -116,24 +134,31 @@ class ProfilePageActivity: AppCompatActivity() {
                 ref.downloadUrl.addOnSuccessListener {
                     Log.d(TAG, "Storage location $it")
                     it.toString()
+
+
+                    //experimental user update code(NEEDS TESTING!)
+                    val user = FirebaseAuth.getInstance().currentUser
+                    if (user != null) {
+                        // User is signed in
+                        val profileUpdates = UserProfileChangeRequest.Builder()
+                            .setPhotoUri(photoUri)
+                            .build()
+
+                        //code from firebase.google (May need refactoring)
+                        user?.updateProfile(profileUpdates)
+                            ?.addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    Log.d(TAG, "User profile updated.")
+                                }
+                            }
+                    } else {
+                        // No user is signed in
+                    }
                 }
             }
     }
 
-    /**
-     * When user wants to upload photo
-     */
-    private fun photoButton(){
-        Log.d(TAG, "photo button clicked")
 
-        //bring up photo selector
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, 0)
-
-        //Upload image to Firebase Storage
-        uploadImage()
-    }
 
     /**
      * Checks if a user is already logged in when launching app
