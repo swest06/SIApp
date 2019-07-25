@@ -48,7 +48,10 @@ class SearchActivity : AppCompatActivity() {
                 snapshot.children.forEach{
                     Log.d(TAG, it.toString())
                     val user = it.getValue(User::class.java)
-                    adapter.add(ProfileSnippet())
+                    if  (user != null){
+                        adapter.add(ProfileSnippet(user))
+                    }
+
                 }
 
                 recycler_view_search.adapter = adapter
