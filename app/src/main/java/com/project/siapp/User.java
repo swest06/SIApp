@@ -15,4 +15,10 @@ public class User {
         this.name = name;
         this.photo = photo;
     }
+
+    public User(){
+        this.uid = "";
+        this.name = "";
+        this.photo = "";
+    }
 }
