@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
@@ -133,27 +134,40 @@ class ProfilePageActivity: AppCompatActivity() {
                 //retrieve file location
                 ref.downloadUrl.addOnSuccessListener {
                     Log.d(TAG, "Storage location $it")
-                    it.toString()
+
+                    //try this to add photo to user's node
+                    val id = FirebaseAuth.getInstance().uid ?: ""
+                    val userPhotoReference = FirebaseDatabase.getInstance().getReference("/users/$id/photo")
+                    userPhotoReference.setValue(it.toString())
 
 
-                    //experimental user update code(NEEDS TESTING!)
+                    //or try this if above fails
                     val user = FirebaseAuth.getInstance().currentUser
+                    val database = FirebaseDatabase.getInstance().reference
                     if (user != null) {
-                        // User is signed in
-                        val profileUpdates = UserProfileChangeRequest.Builder()
-                            .setPhotoUri(photoUri)
-                            .build()
-
-                        //code from firebase.google (May need refactoring)
-                        user?.updateProfile(profileUpdates)
-                            ?.addOnCompleteListener { task ->
-                                if (task.isSuccessful) {
-                                    Log.d(TAG, "User profile updated.")
-                                }
-                            }
-                    } else {
-                        // No user is signed in
+                        database.child("users").child(user.uid).child("photo").setValue(it.toString())
                     }
+
+                    //DELETE AFTER!
+                    //experimental user update code(NEEDS TESTING!)
+//                    val user = FirebaseAuth.getInstance().currentUser
+//                    if (user != null) {
+//
+//                        // User is signed in
+//                        val profileUpdates = UserProfileChangeRequest.Builder()
+//                            .setPhotoUri(photoUri)
+//                            .build()
+//
+//                        //code from firebase.google (May need refactoring)
+//                        user?.updateProfile(profileUpdates)
+//                            ?.addOnCompleteListener { task ->
+//                                if (task.isSuccessful) {
+//                                    Log.d(TAG, "User profile updated.")
+//                                }
+//                            }
+//                    } else {
+//                        // No user is signed in
+//                    }
                 }
             }
     }

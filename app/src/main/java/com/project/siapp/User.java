@@ -8,6 +8,7 @@ public class User {
     public User(String uid, String name){
         this.uid = uid;
         this.name = name;
+        this.photo = "";
     }
 
     public User(String uid, String name, String photo){
