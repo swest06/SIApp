@@ -135,18 +135,33 @@ class ProfilePageActivity: AppCompatActivity() {
                 ref.downloadUrl.addOnSuccessListener {
                     Log.d(TAG, "Storage location $it")
 
+
                     //try this to add photo to user's node
                     val id = FirebaseAuth.getInstance().uid ?: ""
                     val userPhotoReference = FirebaseDatabase.getInstance().getReference("/users/$id/photo")
                     userPhotoReference.setValue(it.toString())
+                        .addOnSuccessListener {
+                            Log.d(TAG, "Image reference added to user's node")
+                        }
+                        .addOnFailureListener {
+                            Log.d(TAG, "Image reference couldn't be added to users node \n" +
+                                    "Trying again")
+
+                            //or try this if above fails
+                            val user = FirebaseAuth.getInstance().currentUser
+                            val database = FirebaseDatabase.getInstance().reference
+                            if (user != null) {
+                                database.child("users").child(user.uid).child("photo").setValue(it.toString())
+                                    .addOnSuccessListener {
+                                        Log.d(TAG, "Image reference added to user's node")
+                                    }
+                                    .addOnFailureListener{
+                                        Log.d(TAG, "Image reference still couldn't be added to users node!")
+                                    }
+                            }
+                        }
 
 
-                    //or try this if above fails
-                    val user = FirebaseAuth.getInstance().currentUser
-                    val database = FirebaseDatabase.getInstance().reference
-                    if (user != null) {
-                        database.child("users").child(user.uid).child("photo").setValue(it.toString())
-                    }
 
                     //DELETE AFTER!
                     //experimental user update code(NEEDS TESTING!)

@@ -58,7 +58,7 @@ class LoginActivity: AppCompatActivity() {
         //Check username and password strings
         if (email.isEmpty()){
             Log.d(TAG, "inside email.isEmpty")
-            toast.setText("Please enter a username")
+            toast.setText("Please enter your email")
             toast.show()
             return
 
