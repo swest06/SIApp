@@ -2,10 +2,8 @@ package com.project.siapp
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.Menu
@@ -15,7 +13,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import de.hdodenhof.circleimageview.CircleImageView
@@ -23,11 +20,11 @@ import java.util.*
 
 class ProfilePageActivity: AppCompatActivity() {
     private val TAG = "ProfilePageActivity"
-    private val photoButton  by lazy { findViewById<Button>(R.id.photo_button_profile_page) }
-    private val inboxButton by lazy { findViewById<Button>(R.id.inbox_button_profile_page) }
-    private val searchButton by lazy { findViewById<Button>(R.id.search_button_profile_page) }
-    private val nameView by lazy { findViewById<TextView>(R.id.name_edit_text_profile_page) }
-    private val circleImage by lazy { findViewById<CircleImageView>(R.id.circle_image_view_profile) }
+    private val photoButton  by lazy { findViewById<Button>(R.id.photo_other_user_profile) }
+    private val inboxButton by lazy { findViewById<Button>(R.id.message_button_other_user_profile) }
+    private val searchButton by lazy { findViewById<Button>(R.id.add_to_group_button_other_user_profile) }
+    private val nameView by lazy { findViewById<TextView>(R.id.name_textView_other_user_profile) }
+    private val circleImage by lazy { findViewById<CircleImageView>(R.id.circle_image_view_other_user_profile) }
 //    private val signOutButton by lazy { findViewById<Button>(R.id.sign_out_profile_page) }
     private lateinit var toast: Toast
     var photoUri: Uri? = null

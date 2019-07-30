@@ -1,7 +1,6 @@
 package com.project.siapp
 
 import com.squareup.picasso.Picasso
-import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.profile_snippet_row_search.view.*
@@ -17,7 +16,7 @@ class ProfileSnippet(val user: User) : Item<ViewHolder>() {
         viewHolder.itemView.name_textView_profile_snippet_row_search.text = user.name
 
         //sets image for each user (user.photo needs refactoring)!
-        Picasso.get().load(user.photo).into(viewHolder.itemView.circle_image_view_profile)
+        Picasso.get().load(user.photo).into(viewHolder.itemView.circle_image_view_other_user_profile)
 
     }
 

@@ -9,7 +9,7 @@
     <!--Background Image-->
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/imageView_other_user_profile"
         android:layout_width="wrap_content"
         android:layout_height="250dp"
         android:scaleType="centerCrop"
@@ -21,19 +21,19 @@
 
     <!--Gradient Overlay-->
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/imageView2_other_user_profile"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/gradient2_opacity"
         android:translationZ="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-        app:layout_constraintEnd_toEndOf="@+id/imageView4"
-        app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_other_user_profile"
+        app:layout_constraintEnd_toEndOf="@+id/imageView_other_user_profile"
+        app:layout_constraintStart_toStartOf="@+id/imageView_other_user_profile"
+        app:layout_constraintTop_toTopOf="@+id/imageView_other_user_profile" />
 
     <!--Add photo button-->
     <Button
-        android:id="@+id/photo_button_profile_page"
+        android:id="@+id/photo_other_user_profile"
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:layout_marginTop="160dp"
@@ -42,26 +42,26 @@
         android:text="add photo"
         android:textColor="#ffffff"
         android:translationZ="2dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView5"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2_other_user_profile"
         app:layout_constraintHorizontal_bias="0.514"
-        app:layout_constraintStart_toStartOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+        app:layout_constraintStart_toStartOf="@+id/imageView2_other_user_profile"
+        app:layout_constraintTop_toTopOf="@+id/imageView2_other_user_profile" />
 
     <Button
-            android:id="@+id/inbox_button_profile_page"
+            android:id="@+id/message_button_other_user_profile"
             android:layout_width="202dp"
             android:layout_height="0dp"
             android:paddingRight="32dp"
             android:text="INBOX"
             android:textColor="#ffffff"
             android:background="@drawable/profile_buttons1"
-            app:layout_constraintBottom_toBottomOf="@+id/photo_button_profile_page"
+            app:layout_constraintBottom_toBottomOf="@+id/photo_other_user_profile"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView5"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2_other_user_profile"
             app:layout_constraintVertical_bias="1.0"/>
 
     <Button
-            android:id="@+id/search_button_profile_page"
+            android:id="@+id/add_to_group_button_other_user_profile"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/profile_buttons1"
@@ -69,12 +69,12 @@
             android:text="SEARCH"
             android:textColor="#ffffff"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/inbox_button_profile_page"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4"
-            app:layout_constraintBottom_toBottomOf="@+id/inbox_button_profile_page"/>
+            app:layout_constraintStart_toEndOf="@+id/message_button_other_user_profile"
+            app:layout_constraintTop_toBottomOf="@+id/imageView_other_user_profile"
+            app:layout_constraintBottom_toBottomOf="@+id/message_button_other_user_profile"/>
 
     <TextView
-        android:id="@+id/name_edit_text_profile_page"
+        android:id="@+id/name_textView_other_user_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -87,10 +87,10 @@
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/photo_button_profile_page" />
+        app:layout_constraintTop_toBottomOf="@+id/photo_other_user_profile" />
 
     <TextView
-        android:id="@+id/editText2"
+        android:id="@+id/age_textView_other_user_profile"
         android:layout_width="202dp"
         android:layout_height="20dp"
         android:layout_marginTop="8dp"
@@ -99,22 +99,22 @@
         android:hint="Age"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/location_textView_other_user_profile" />
 
     <TextView
-        android:id="@+id/editText3"
+        android:id="@+id/gender_textView_other_user_profile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="center"
         android:hint="Gender"
         android:inputType="textPersonName"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText2"
+        app:layout_constraintBaseline_toBaselineOf="@+id/age_textView_other_user_profile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editText2" />
+        app:layout_constraintStart_toEndOf="@+id/age_textView_other_user_profile" />
 
     <TextView
-        android:id="@+id/editText4"
+        android:id="@+id/about_textView_other_user_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -126,10 +126,10 @@
         android:text="About"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/age_textView_other_user_profile" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/aboutInfo_textView_other_user_profile"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="32dp"
@@ -145,29 +145,29 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/about_textView_other_user_profile" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/location_textView_other_user_profile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Location"
         android:gravity="center"
-        app:layout_constraintEnd_toEndOf="@+id/name_edit_text_profile_page"
-        app:layout_constraintStart_toStartOf="@+id/name_edit_text_profile_page"
-        app:layout_constraintTop_toBottomOf="@+id/name_edit_text_profile_page" />
+        app:layout_constraintEnd_toEndOf="@+id/name_textView_other_user_profile"
+        app:layout_constraintStart_toStartOf="@+id/name_textView_other_user_profile"
+        app:layout_constraintTop_toBottomOf="@+id/name_textView_other_user_profile" />
 
     <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="160dp"
             android:layout_height="160dp"
             app:civ_border_width="4dp"
             app:civ_border_color="#ffffff"
-            app:layout_constraintEnd_toEndOf="@+id/photo_button_profile_page"
-            app:layout_constraintStart_toStartOf="@+id/photo_button_profile_page"
+            app:layout_constraintEnd_toEndOf="@+id/photo_other_user_profile"
+            app:layout_constraintStart_toStartOf="@+id/photo_other_user_profile"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintTop_toTopOf="@+id/photo_button_profile_page"
-            app:layout_constraintBottom_toBottomOf="@id/photo_button_profile_page"
-            android:id="@+id/circle_image_view_profile"
+            app:layout_constraintTop_toTopOf="@+id/photo_other_user_profile"
+            app:layout_constraintBottom_toBottomOf="@id/photo_other_user_profile"
+            android:id="@+id/circle_image_view_other_user_profile"
             android:translationZ="3dp"/>
 
     <!--Sign Out Button-->

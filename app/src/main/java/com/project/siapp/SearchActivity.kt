@@ -1,5 +1,6 @@
 package com.project.siapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -51,18 +52,22 @@ class SearchActivity : AppCompatActivity() {
                     if  (user != null){
                         adapter.add(ProfileSnippet(user))
                     }
-
                 }
+
+                //Go to other user's full profile
+                adapter.setOnItemClickListener { item, view ->
+
+                    val intent = Intent(view.context, OtherUserProfileActivity::class.java)
+                    startActivity(intent)
+                }
+
 
                 recycler_view_search.adapter = adapter
             }
 
             override fun onCancelled(p0: DatabaseError) {
-
+            //TODO
             }
-
-
-
         })
     }
 }
