@@ -20,11 +20,11 @@ import java.util.*
 
 class ProfilePageActivity: AppCompatActivity() {
     private val TAG = "ProfilePageActivity"
-    private val photoButton  by lazy { findViewById<Button>(R.id.photo_other_user_profile) }
-    private val inboxButton by lazy { findViewById<Button>(R.id.message_button_other_user_profile) }
-    private val searchButton by lazy { findViewById<Button>(R.id.add_to_group_button_other_user_profile) }
-    private val nameView by lazy { findViewById<TextView>(R.id.name_textView_other_user_profile) }
-    private val circleImage by lazy { findViewById<CircleImageView>(R.id.circle_image_view_other_user_profile) }
+    private val photoButton  by lazy { findViewById<Button>(R.id.photo_profile_page) }
+    private val inboxButton by lazy { findViewById<Button>(R.id.message_button_profile_page) }
+    private val searchButton by lazy { findViewById<Button>(R.id.add_to_group_button_profile_page) }
+    private val nameView by lazy { findViewById<TextView>(R.id.name_textView_profile_page) }
+    private val circleImage by lazy { findViewById<CircleImageView>(R.id.circle_image_view_profile_page) }
 //    private val signOutButton by lazy { findViewById<Button>(R.id.sign_out_profile_page) }
     private lateinit var toast: Toast
     var photoUri: Uri? = null
