@@ -48,7 +48,19 @@
         app:layout_constraintTop_toTopOf="@+id/imageView2__profile_page" />
 
     <Button
-            android:id="@+id/message_button_profile_page"
+            android:text="Save Changes"
+            android:layout_width="197dp"
+            android:layout_height="65dp"
+            android:gravity="center"
+            android:id="@+id/save_changes_button_profile_page"
+            android:textColor="#ffffff"
+            android:background="@drawable/profile_buttons1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/search_button_profile_page"/>
+
+    <Button
+            android:id="@+id/inbox_button_profile_page"
             android:layout_width="202dp"
             android:layout_height="0dp"
             android:paddingRight="32dp"
@@ -61,7 +73,7 @@
             app:layout_constraintVertical_bias="1.0"/>
 
     <Button
-            android:id="@+id/add_to_group_button_profile_page"
+            android:id="@+id/search_button_profile_page"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/profile_buttons1"
@@ -69,9 +81,9 @@
             android:text="SEARCH"
             android:textColor="#ffffff"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/message_button_profile_page"
+            app:layout_constraintStart_toEndOf="@+id/inbox_button_profile_page"
             app:layout_constraintTop_toBottomOf="@+id/imageView_profile_page"
-            app:layout_constraintBottom_toBottomOf="@+id/message_button_profile_page"/>
+            app:layout_constraintBottom_toBottomOf="@+id/inbox_button_profile_page"/>
 
     <EditText
         android:id="@+id/name_textView_profile_page"
@@ -166,6 +178,7 @@
             app:layout_constraintBottom_toBottomOf="@id/photo_profile_page"
             android:id="@+id/circle_image_view_profile_page"
             android:translationZ="3dp"/>
+
 
     <!--Sign Out Button-->
     <!--<Button-->

@@ -20,9 +20,10 @@ import java.util.*
 
 class ProfilePageActivity: AppCompatActivity() {
     private val TAG = "ProfilePageActivity"
+    private val saveButton by lazy {findViewById<Button>(R.id.save_changes_button_profile_page)}
     private val photoButton  by lazy { findViewById<Button>(R.id.photo_profile_page) }
-    private val inboxButton by lazy { findViewById<Button>(R.id.message_button_profile_page) }
-    private val searchButton by lazy { findViewById<Button>(R.id.add_to_group_button_profile_page) }
+    private val inboxButton by lazy { findViewById<Button>(R.id.inbox_button_profile_page) }
+    private val searchButton by lazy { findViewById<Button>(R.id.search_button_profile_page) }
     private val nameView by lazy { findViewById<TextView>(R.id.name_textView_profile_page) }
     private val circleImage by lazy { findViewById<CircleImageView>(R.id.circle_image_view_profile_page) }
 //    private val signOutButton by lazy { findViewById<Button>(R.id.sign_out_profile_page) }
@@ -39,6 +40,11 @@ class ProfilePageActivity: AppCompatActivity() {
 
         //CODE FOR LAUNCHING REGISTER PAGE WHEN USER IS NOT LOGGED IN. Uncomment when launcher intent filter is added to manifest xml
         //loginCheck()
+
+        //Save Button
+        saveButton.setOnClickListener {
+            saveChanges()
+        }
 
         //Photo Button
         photoButton.setOnClickListener {
@@ -58,6 +64,21 @@ class ProfilePageActivity: AppCompatActivity() {
         //Search Button
         searchButton.setOnClickListener {
             searchPage()
+        }
+    }
+
+    private fun saveChanges(){
+//        val id = FirebaseAuth.getInstance().uid ?: ""
+//        val userIdReference = FirebaseDatabase.getInstance().getReference("/users/$id")
+
+        val user = FirebaseAuth.getInstance().currentUser
+        val database = FirebaseDatabase.getInstance().reference
+        if (user != null) {
+            database.child("users").child(user.uid).child("name").setValue(R.id.name_textView_profile_page.toString())
+            database.child("users").child(user.uid).child("age").setValue(R.id.age_textView_profile_page.toString())
+            database.child("users").child(user.uid).child("gender").setValue(R.id.gender_textView_profile_page.toString())
+            database.child("users").child(user.uid).child("location").setValue(R.id.location_textView_profile_page.toString())
+            database.child("users").child(user.uid).child("about").setValue(R.id.aboutInfo_textView_profile_page.toString())
         }
     }
 
