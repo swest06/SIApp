@@ -54,7 +54,7 @@ class SearchActivity : AppCompatActivity() {
                     }
                 }
 
-                //Go to other user's full profile
+                //Go to other user's full profile when their snippet is clicked
                 adapter.setOnItemClickListener { item, view ->
 
                     val intent = Intent(view.context, OtherUserProfileActivity::class.java)
