@@ -74,10 +74,12 @@ class ProfilePageActivity: AppCompatActivity() {
         val user = FirebaseAuth.getInstance().currentUser
         val database = FirebaseDatabase.getInstance().reference
         if (user != null) {
+
+            //FIX HERE IT'S NOT GETTING THE CORRECT VALUES
             database.child("users").child(user.uid).child("name").setValue(R.id.name_textView_profile_page.toString())
             database.child("users").child(user.uid).child("age").setValue(R.id.age_textView_profile_page.toString())
             database.child("users").child(user.uid).child("gender").setValue(R.id.gender_textView_profile_page.toString())
-            database.child("users").child(user.uid).child("location").setValue(R.id.location_textView_profile_page.toString())
+            database.child("users").child(user.uid).child("location").setValue("London")
             database.child("users").child(user.uid).child("about").setValue(R.id.aboutInfo_textView_profile_page.toString())
         }
     }

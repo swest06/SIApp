@@ -16,6 +16,7 @@ class ProfileSnippet(val user: User) : Item<ViewHolder>() {
         viewHolder.itemView.name_textView_profile_snippet_row_search.text = user.name
 
         //sets image for each user (user.photo needs refactoring)!
+        //VALUE CANNOT BE NULL SO ADD IF STATEMENT
         Picasso.get().load(user.photo).into(viewHolder.itemView.circle_image_view_profile_page)
 
     }
