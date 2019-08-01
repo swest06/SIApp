@@ -13,7 +13,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_profile_page.*
@@ -31,6 +32,9 @@ class ProfilePageActivity: AppCompatActivity() {
     private lateinit var toast: Toast
     var photoUri: Uri? = null
 
+    private val user by lazy { FirebaseAuth.getInstance().currentUser}
+    private val database by lazy { FirebaseDatabase.getInstance().reference }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,12 +43,17 @@ class ProfilePageActivity: AppCompatActivity() {
         toast = getToast(this@ProfilePageActivity)
 
 
+
+        //Set profile values
+        setProfileValues(user, database)
+
         //CODE FOR LAUNCHING REGISTER PAGE WHEN USER IS NOT LOGGED IN. Uncomment when launcher intent filter is added to manifest xml
         //loginCheck()
 
         //Save Button
         saveButton.setOnClickListener {
-            saveChanges()
+            saveChanges(user, database)
+            setProfileValues(user, database)
         }
 
         //Photo Button
@@ -68,15 +77,37 @@ class ProfilePageActivity: AppCompatActivity() {
         }
     }
 
-    private fun saveChanges(){
-//        val id = FirebaseAuth.getInstance().uid ?: ""
-//        val userIdReference = FirebaseDatabase.getInstance().getReference("/users/$id")
+    private fun setProfileValues(user: FirebaseUser?, database: DatabaseReference) {
+        val userRef = database.child("users").child(user?.uid!!)
+        userRef.addListenerForSingleValueEvent(object: ValueEventListener{
 
-        val user = FirebaseAuth.getInstance().currentUser
-        val database = FirebaseDatabase.getInstance().reference
+            override fun onCancelled(error: DatabaseError) {
+                Log.d(TAG, "\n profile changes could not made \n" +
+                        "DatabaseError: ${error}")
+            }
+
+            //Get node values
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val name: String? = snapshot.child("name").getValue(String::class.java)
+                val location: String? = snapshot.child("location").getValue(String::class.java)
+                val age: String? = snapshot.child("age").getValue(String::class.java)
+                val gender: String? = snapshot.child("gender").getValue(String::class.java)
+                val aboutInfo: String? = snapshot.child("about").getValue(String::class.java)
+
+                //set activity text fields
+                name_textView_profile_page.setText(name)
+                location_textView_profile_page.setText(location)
+                age_textView_profile_page.setText(age)
+                gender_textView_profile_page.setText(gender)
+                aboutInfo_textView_profile_page.setText(aboutInfo)
+            }
+        })
+    }
+
+    private fun saveChanges(user: FirebaseUser?, database: DatabaseReference){
+
         if (user != null) {
 
-            database.child("users").child(user.uid).child("name").setValue(name_textView_profile_page.text.toString())
             database.child("users").child(user.uid).child("name").setValue(name_textView_profile_page.text.toString())
             database.child("users").child(user.uid).child("age").setValue(age_textView_profile_page.text.toString())
             database.child("users").child(user.uid).child("gender").setValue(gender_textView_profile_page.text.toString())
