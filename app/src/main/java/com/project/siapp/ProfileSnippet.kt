@@ -17,7 +17,12 @@ class ProfileSnippet(val user: User) : Item<ViewHolder>() {
 
         //sets image for each user (user.photo needs refactoring)!
         //VALUE CANNOT BE NULL SO ADD IF STATEMENT
-        Picasso.get().load(user.photo).into(viewHolder.itemView.circle_image_view_profile_page)
+        if ((user.photo).isEmpty() || (user.photo).toString().length == 0){
+            viewHolder.itemView.circle_image_view_snippet_row.setImageResource(R.drawable.profile_avatar_placeholder_large)
+        } else{
+            Picasso.get().load(user.photo).into(viewHolder.itemView.circle_image_view_snippet_row)
+        }
+
 
     }
 
