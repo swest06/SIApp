@@ -9,10 +9,21 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+
         <activity android:name=".ChatLogActivity">
+            <!-- Adds back button to action bar -->
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".OtherUserProfileActivity"/>
         </activity>
+
         <activity android:name=".OtherUserProfileActivity">
+            <!-- Adds back button to action bar -->
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".SearchActivity"/>
         </activity>
+
         <activity android:name=".SearchActivity">
 
             <!-- Adds back button to action bar -->
@@ -20,6 +31,7 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".ProfilePageActivity"/>
         </activity>
+
         <activity android:name=".InboxActivity">
 
             <!-- Adds back button to action bar -->
@@ -27,6 +39,7 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".ProfilePageActivity"/>
         </activity>
+
         <activity android:name=".RegisterActivity">
 
             <!-- Method 1 -->
