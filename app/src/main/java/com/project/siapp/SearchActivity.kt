@@ -16,6 +16,17 @@ import kotlinx.android.synthetic.main.activity_search.*
 class SearchActivity : AppCompatActivity() {
     private val TAG = "SearchActivity"
 
+    //constants to pass to intents (may just end up using user id)
+    companion object{
+        val USER_ID = "USER_ID"
+        val USER_NAME = "USER_NAME"
+        val USER_AGE = "USER_AGE"
+        val USER_LOCATION = "USER_LOCATION"
+        val USER_GENDER = "USER_GENDER"
+        val USER_ABOUT = "USER_ABOUT"
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
@@ -37,6 +48,7 @@ class SearchActivity : AppCompatActivity() {
         retrieveUsers()
     }
 
+
     private fun retrieveUsers(){
         val reference = FirebaseDatabase.getInstance().getReference("/users")
         reference.addListenerForSingleValueEvent(object: ValueEventListener{
@@ -57,7 +69,12 @@ class SearchActivity : AppCompatActivity() {
                 //Go to other user's full profile when their snippet is clicked
                 adapter.setOnItemClickListener { item, view ->
 
+                    //cast item as profile snippet
+                    val profileSnippet = item as ProfileSnippet
+
                     val intent = Intent(view.context, OtherUserProfileActivity::class.java)
+                    intent.putExtra(USER_NAME, profileSnippet.user.name)
+                    intent.putExtra(USER_ID, profileSnippet.user.uid)
                     startActivity(intent)
                 }
 
