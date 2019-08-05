@@ -11,6 +11,10 @@ class OtherUserProfileActivity : AppCompatActivity() {
     private val messageButton by lazy { findViewById<Button>(R.id.message_button_other_user_profile) }
     private val addToGroupButton by lazy { findViewById<Button>(R.id.add_to_group_button_other_user_profile) }
 
+    //parcel object
+    val user by lazy { intent.getParcelableExtra<User>(SearchActivity.USER_KEY) }
+
+    //string values for user
     val username by lazy { intent.getStringExtra(SearchActivity.USER_NAME) }
     val userLocation by lazy { intent.getStringExtra(SearchActivity.USER_LOCATION) }
     val userGender by lazy { intent.getStringExtra(SearchActivity.USER_GENDER) }
@@ -36,6 +40,7 @@ class OtherUserProfileActivity : AppCompatActivity() {
     fun startChatLog(){
         val intent = Intent(this, ChatLogActivity::class.java)
 
+        //Needs fixing!!
         intent.putExtra("USER_NAME", username)
         intent.putExtra("USER_ID", userId)
         intent.putExtra("USER_PHOTO", userPhoto)

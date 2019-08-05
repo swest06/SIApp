@@ -18,6 +18,8 @@ class SearchActivity : AppCompatActivity() {
 
     //constants to pass to intents (may just end up using user id)
     companion object{
+        val USER_KEY = "USER_KEY"
+
         val USER_ID = "USER_ID"
         val USER_NAME = "USER_NAME"
         val USER_AGE = "USER_AGE"
@@ -74,6 +76,9 @@ class SearchActivity : AppCompatActivity() {
                     val profileSnippet = item as ProfileSnippet
 
                     val intent = Intent(view.context, OtherUserProfileActivity::class.java)
+
+                    //parcelized user object
+                    intent.putExtra(USER_KEY, profileSnippet.user)
 
                     intent.putExtra(USER_NAME, profileSnippet.user.name)
                     intent.putExtra(USER_ID, profileSnippet.user.uid)

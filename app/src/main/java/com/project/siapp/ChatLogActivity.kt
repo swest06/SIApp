@@ -9,10 +9,13 @@ import kotlinx.android.synthetic.main.activity_chat_log.*
 
 class ChatLogActivity : AppCompatActivity() {
 
+    //Needs fixing!! should be getting username from OtherUserProfile
+    val userName by lazy { intent.getStringExtra(SearchActivity.USER_NAME) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
-        supportActionBar?.title = "Chat Log"
+        supportActionBar?.title = "$userName"
 
         val adapter = GroupAdapter<ViewHolder>()
 
