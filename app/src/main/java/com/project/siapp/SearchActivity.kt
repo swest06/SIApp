@@ -24,6 +24,7 @@ class SearchActivity : AppCompatActivity() {
         val USER_LOCATION = "USER_LOCATION"
         val USER_GENDER = "USER_GENDER"
         val USER_ABOUT = "USER_ABOUT"
+        val USER_PHOTO = "USER_PHOTO"
 
     }
 
@@ -73,8 +74,14 @@ class SearchActivity : AppCompatActivity() {
                     val profileSnippet = item as ProfileSnippet
 
                     val intent = Intent(view.context, OtherUserProfileActivity::class.java)
+
                     intent.putExtra(USER_NAME, profileSnippet.user.name)
                     intent.putExtra(USER_ID, profileSnippet.user.uid)
+                    intent.putExtra(USER_AGE, profileSnippet.user.age)
+                    intent.putExtra(USER_ABOUT, profileSnippet.user.about)
+                    intent.putExtra(USER_GENDER, profileSnippet.user.gender)
+                    intent.putExtra(USER_LOCATION, profileSnippet.user.location)
+
                     startActivity(intent)
                 }
 
