@@ -133,8 +133,8 @@ class ProfilePageActivity: AppCompatActivity() {
         //goes to onActivityResult()
         startActivityForResult(intent, 0)
 
-        //Upload image to Firebase Storage
-        uploadImage()
+        //Upload image to Firebase Storage (trying inside above function
+        //uploadImage()
     }
 
 
@@ -157,8 +157,26 @@ class ProfilePageActivity: AppCompatActivity() {
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, photoUri)
             circleImage.setImageBitmap(bitmap)
 
-            //hide button after image upload
-            photoButton.alpha = 0f
+            if(photoUri != null) {
+
+                //Delete after
+                print("photoUri not null ${photoUri.toString()}")
+                Log.d(TAG, "\"photoUri not null ${photoUri.toString()}\"")
+
+                //hide button after image upload
+                photoButton.alpha = 0f
+
+                //Upload image to firebase storage
+                uploadImage()
+            } else {
+                print("photoUri is null!!: ${photoUri.toString()}")
+                Log.d(TAG, "\"photoUri is null ${photoUri.toString()}\"")
+
+                toast.setText("Photo could not be uploaded")
+                toast.show()
+                return
+            }
+
 
 //            val bitmapDrawable = BitmapDrawable(bitmap)
 //            photo_button.setBackgroundDrawable(bitmapDrawable)
@@ -169,12 +187,6 @@ class ProfilePageActivity: AppCompatActivity() {
      * Store image in Firebase storage
      */
     private fun uploadImage() {
-        //check value
-        if (photoUri == null){
-            toast.setText("Photo could not be uploaded")
-            toast.show()
-            return
-        }
 
         //Generate unique identifier for photo
         val filename = UUID.randomUUID().toString()
