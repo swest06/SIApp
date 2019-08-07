@@ -10,7 +10,9 @@ import kotlinx.android.synthetic.main.activity_chat_log.*
 class ChatLogActivity : AppCompatActivity() {
 
     //Needs fixing!! should be getting username from OtherUserProfile
-    val userName by lazy { intent.getStringExtra(SearchActivity.USER_NAME) }
+    val userName by lazy { intent.getStringExtra(OtherUserProfileActivity.USER_NAME) }
+    val userPhot by lazy { intent.getStringExtra(OtherUserProfileActivity.USER_PHOTO) }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

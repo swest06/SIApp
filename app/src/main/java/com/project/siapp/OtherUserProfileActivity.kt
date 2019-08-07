@@ -23,6 +23,20 @@ class OtherUserProfileActivity : AppCompatActivity() {
     val userPhoto by lazy { intent.getStringExtra(SearchActivity.USER_PHOTO) }
     val userAbout by lazy { intent.getStringExtra(SearchActivity.USER_ABOUT) }
 
+    //constants to pass to intents (may just end up using user id)
+    companion object{
+        val USER_KEY = "USER_KEY"
+
+        val USER_ID = "USER_ID"
+        val USER_NAME = "USER_NAME"
+        val USER_AGE = "USER_AGE"
+        val USER_LOCATION = "USER_LOCATION"
+        val USER_GENDER = "USER_GENDER"
+        val USER_ABOUT = "USER_ABOUT"
+        val USER_PHOTO = "USER_PHOTO"
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_other_user_profile)
@@ -41,9 +55,9 @@ class OtherUserProfileActivity : AppCompatActivity() {
         val intent = Intent(this, ChatLogActivity::class.java)
 
         //Needs fixing!!
-        intent.putExtra("USER_NAME", username)
-        intent.putExtra("USER_ID", userId)
-        intent.putExtra("USER_PHOTO", userPhoto)
+        intent.putExtra(USER_NAME, username)
+        intent.putExtra(USER_ID, userId)
+        intent.putExtra(USER_PHOTO, userPhoto)
 
         startActivity(intent)
     }
@@ -54,5 +68,7 @@ class OtherUserProfileActivity : AppCompatActivity() {
         age_textView_other_user_profile.setText(userAge)
         gender_textView_other_user_profile.setText(userGender)
         aboutInfo_textView_other_user_profile.setText(userAbout)
+
+        //NEEED TO SET PHOTO FIELD
     }
 }

@@ -153,9 +153,12 @@ class ProfilePageActivity: AppCompatActivity() {
             //URI represents location of where image is stored on device
             photoUri = data.data
 
+
             //Save image as bitmap and set as background within placeholder(Button)
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, photoUri)
             circleImage.setImageBitmap(bitmap)
+
+
 
             if(photoUri != null) {
 
