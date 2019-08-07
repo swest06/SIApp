@@ -58,6 +58,7 @@ class OtherUserProfileActivity : AppCompatActivity() {
         intent.putExtra(USER_NAME, username)
         intent.putExtra(USER_ID, userId)
         intent.putExtra(USER_PHOTO, userPhoto)
+        intent.putExtra(USER_KEY, user)
 
         startActivity(intent)
     }
