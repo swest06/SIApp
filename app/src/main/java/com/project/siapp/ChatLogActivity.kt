@@ -5,7 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
@@ -23,25 +27,72 @@ class ChatLogActivity : AppCompatActivity() {
     val userName by lazy { intent.getStringExtra(OtherUserProfileActivity.USER_NAME) }
     val userPhoto by lazy { intent.getStringExtra(OtherUserProfileActivity.USER_PHOTO) }
 
-    //parcelized user object
+    //parcelized user object. Might change to lateinit var
     val user by lazy { intent.getParcelableExtra<User>(OtherUserProfileActivity.USER_KEY) }
 
+    //adapter
+    val adapter = GroupAdapter<ViewHolder>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
-        supportActionBar?.title = "${user.name}"
+        supportActionBar?.title = user.name
 
-        val adapter = GroupAdapter<ViewHolder>()
+
         reyclerView_chat_log.adapter = adapter
 
+        //listener for new messages
+        listenForMessages()
+
+        //Send button
         sendButton.setOnClickListener {
             Log.d(TAG, "Send button clicked")
             sendMessage()
         }
     }
 
+    private fun listenForMessages(){
+        //Database reference
+        val ref = FirebaseDatabase.getInstance().getReference("messages")
 
+        //listens for changes to messages child nodes
+        ref.addChildEventListener(object: ChildEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            /**
+             * Everytime a new node is added to the database add it to the adapter
+             */
+            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                val message= p0.getValue(Message::class.java)
+
+                if (message != null){
+                    Log.d(TAG, message?.text)
+
+                    //add messages to adapter
+                    if (message.fromId == FirebaseAuth.getInstance().uid){
+                        adapter.add(ChatFromItem(message.text))
+                    } else {
+                        adapter.add(ChatToItem(message.text, user))
+                    }
+                }
+            }
+
+            override fun onChildRemoved(p0: DataSnapshot) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+        })
+    }
 
     private fun sendMessage() {
         //Database reference
@@ -67,9 +118,6 @@ class ChatLogActivity : AppCompatActivity() {
 /**
  * Classes used in this class. Eventually give their own file
  */
-class Message(val id: String, val text: String, val fromId: String, val toId: String, val timeStamp: Long){
-
-}
 
 
 class ChatFromItem(val text: String): Item<ViewHolder>(){
@@ -84,10 +132,15 @@ class ChatFromItem(val text: String): Item<ViewHolder>(){
 }
 
 
-class ChatToItem(val text: String): Item<ViewHolder>(){
+class ChatToItem(val text: String, val user: User): Item<ViewHolder>(){
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.textView_chat_to.text = text
+
+        //Put profile picture in circle view
+        val uri = user.photo
+        val circleImageView = viewHolder.itemView.imageView_chat_to
+        Picasso.get().load(uri).into(circleImageView)
     }
 
     override fun getLayout(): Int {

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_other_user_profile.*
 
 
@@ -14,7 +15,7 @@ class OtherUserProfileActivity : AppCompatActivity() {
     //parcel object
     val user by lazy { intent.getParcelableExtra<User>(SearchActivity.USER_KEY) }
 
-    //string values for user
+    //string values for user (Can delete if parcelized user object works correctly)
     val username by lazy { intent.getStringExtra(SearchActivity.USER_NAME) }
     val userLocation by lazy { intent.getStringExtra(SearchActivity.USER_LOCATION) }
     val userGender by lazy { intent.getStringExtra(SearchActivity.USER_GENDER) }
@@ -70,6 +71,15 @@ class OtherUserProfileActivity : AppCompatActivity() {
         gender_textView_other_user_profile.setText(userGender)
         aboutInfo_textView_other_user_profile.setText(userAbout)
 
-        //NEEED TO SET PHOTO FIELD
+        //Try to load photo into image view
+        val circleImageView = circle_image_view_other_user_profile
+
+        if (!user.photo.isEmpty()){
+            Picasso.get().load(userPhoto).into(circleImageView)
+        } else {
+            circleImageView.setImageResource(R.drawable.profile_avatar_placeholder_large)
+        }
+
+
     }
 }
