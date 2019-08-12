@@ -80,7 +80,9 @@ class ChatLogActivity : AppCompatActivity() {
 
                     //add messages to adapter
                     if (message.fromId == FirebaseAuth.getInstance().uid){
-                        adapter.add(ChatFromItem(message.text))
+
+                        val currentUser = ProfilePageActivity.currentUser
+                        adapter.add(ChatFromItem(message.text, currentUser!!))
                     } else {
                         adapter.add(ChatToItem(message.text, user))
                     }
@@ -120,10 +122,21 @@ class ChatLogActivity : AppCompatActivity() {
  */
 
 
-class ChatFromItem(val text: String): Item<ViewHolder>(){
+class ChatFromItem(val text: String, val user: User): Item<ViewHolder>(){
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.textView_chat_from.text = text
+
+        //Put profile picture in circle view
+        val uri = user.photo
+        val circleImageView = viewHolder.itemView.imageView_chat_from
+
+        if (!uri.isEmpty()){
+            Picasso.get().load(uri).into(circleImageView)
+        } else {
+            circleImageView.setImageResource(R.drawable.profile_avatar_placeholder_large)
+        }
+
     }
 
     override fun getLayout(): Int {
@@ -140,7 +153,13 @@ class ChatToItem(val text: String, val user: User): Item<ViewHolder>(){
         //Put profile picture in circle view
         val uri = user.photo
         val circleImageView = viewHolder.itemView.imageView_chat_to
-        Picasso.get().load(uri).into(circleImageView)
+
+        if (!uri.isEmpty()){
+            Picasso.get().load(uri).into(circleImageView)
+        } else {
+            circleImageView.setImageResource(R.drawable.profile_avatar_placeholder_large)
+        }
+
     }
 
     override fun getLayout(): Int {

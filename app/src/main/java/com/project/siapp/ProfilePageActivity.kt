@@ -35,13 +35,16 @@ class ProfilePageActivity: AppCompatActivity() {
     private val user by lazy { FirebaseAuth.getInstance().currentUser}
     private val database by lazy { FirebaseDatabase.getInstance().reference }
 
+    companion object{
+        var currentUser: User? = null
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_page)
         supportActionBar?.title = "Profile"
         toast = getToast(this@ProfilePageActivity)
-
 
 
         //Set profile values
@@ -93,6 +96,9 @@ class ProfilePageActivity: AppCompatActivity() {
                 val age: String? = snapshot.child("age").getValue(String::class.java)
                 val gender: String? = snapshot.child("gender").getValue(String::class.java)
                 val aboutInfo: String? = snapshot.child("about").getValue(String::class.java)
+
+                //try to get whole current user
+                currentUser = snapshot.getValue(User::class.java)
 
                 //set activity text fields
                 name_textView_profile_page.setText(name)
