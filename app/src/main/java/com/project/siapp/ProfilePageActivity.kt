@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_profile_page.*
 import java.util.*
@@ -45,6 +46,9 @@ class ProfilePageActivity: AppCompatActivity() {
         setContentView(R.layout.activity_profile_page)
         supportActionBar?.title = "Profile"
         toast = getToast(this@ProfilePageActivity)
+
+        photoButton.translationZ = 10F
+        photoButton.alpha = 1F
 
 
         //Set profile values
@@ -96,6 +100,7 @@ class ProfilePageActivity: AppCompatActivity() {
                 val age: String? = snapshot.child("age").getValue(String::class.java)
                 val gender: String? = snapshot.child("gender").getValue(String::class.java)
                 val aboutInfo: String? = snapshot.child("about").getValue(String::class.java)
+                val photo: String? = snapshot.child("photo").getValue(String::class.java)
 
                 //try to get whole current user
                 currentUser = snapshot.getValue(User::class.java)
@@ -106,6 +111,17 @@ class ProfilePageActivity: AppCompatActivity() {
                 age_textView_profile_page.setText(age)
                 gender_textView_profile_page.setText(gender)
                 aboutInfo_textView_profile_page.setText(aboutInfo)
+
+                //set profile photo
+                if (!photo.isNullOrEmpty()){
+                    Picasso.get().load(photo).into(circle_image_view_profile_page)
+                    photoButton.alpha = 0F
+                } else {
+                    Log.d(TAG, "Photo is null")
+                    photoButton.translationZ = 10F
+                    photoButton.alpha = 1F
+                }
+
             }
         })
     }
@@ -173,7 +189,7 @@ class ProfilePageActivity: AppCompatActivity() {
                 Log.d(TAG, "\"photoUri not null ${photoUri.toString()}\"")
 
                 //hide button after image upload
-                photoButton.alpha = 0f
+                photoButton.alpha = 0F
 
                 //Upload image to firebase storage
                 uploadImage()

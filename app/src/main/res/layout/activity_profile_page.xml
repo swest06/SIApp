@@ -41,7 +41,7 @@
         android:background="@drawable/rounded_image"
         android:text="add photo"
         android:textColor="#ffffff"
-        android:translationZ="2dp"
+        android:translationZ="10dp"
         app:layout_constraintEnd_toEndOf="@+id/imageView2__profile_page"
         app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="@+id/imageView2__profile_page"
