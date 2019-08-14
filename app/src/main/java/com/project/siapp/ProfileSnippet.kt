@@ -12,8 +12,11 @@ class ProfileSnippet(val user: User) : Item<ViewHolder>() {
      */
     override fun bind(viewHolder: ViewHolder, position: Int) {
 
-        //sets name for each user
+        //sets fields for each user
         viewHolder.itemView.name_textView_profile_snippet_row_search.text = user.name
+        viewHolder.itemView.age_textView_profile_snippet_row_search.text = user.age
+        viewHolder.itemView.gender_textView_profile_snippet_row_search.text = user.gender
+//        viewHolder.itemView.location
 
         //sets image for each user (user.photo needs refactoring)!
         //VALUE CANNOT BE NULL SO ADD IF STATEMENT
