@@ -8,8 +8,8 @@
         android:background="@drawable/gradient_search">
 
     <androidx.cardview.widget.CardView
-            android:layout_width="395dp"
-            android:layout_height="200dp"
+            android:layout_width="380dp"
+            android:layout_height="205dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp"
@@ -17,8 +17,8 @@
             android:layout_marginEnd="16dp"
             android:id="@+id/cardView"
             app:layout_constraintHorizontal_bias="0.0"
-            app:cardBackgroundColor="#ccb2b1ba"
-            app:cardCornerRadius="8dp" android:layout_marginTop="8dp"/>
+            app:cardBackgroundColor="#ccf8ffc4"
+            app:cardCornerRadius="8dp" android:layout_marginTop="16dp"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="138dp"
@@ -64,7 +64,7 @@
             app:layout_constraintStart_toStartOf="@+id/location_textView_profile_snippet_row"/>
     <TextView
             android:text="Gender"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/gender_textView_profile_snippet_row_search"
             app:layout_constraintBaseline_toBaselineOf="@+id/age_textView_profile_snippet_row_search"
@@ -73,7 +73,8 @@
             android:textStyle="bold"
             android:textColor="#6900a2"
             app:layout_constraintStart_toEndOf="@+id/age_textView_profile_snippet_row_search"
-            android:layout_marginStart="16dp"/>
+            android:layout_marginStart="16dp" app:layout_constraintEnd_toEndOf="@+id/cardView"
+            android:layout_marginEnd="24dp"/>
     <TextView
             android:text="Interests/about"
             android:textStyle="bold"
@@ -83,7 +84,7 @@
             android:id="@+id/interests_textView_profile_snippet_row_search"
             android:translationZ="3dp"
             app:layout_constraintEnd_toEndOf="@+id/cardView"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="24dp"
             android:textColor="#6900a2"
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/age_textView_profile_snippet_row_search"
