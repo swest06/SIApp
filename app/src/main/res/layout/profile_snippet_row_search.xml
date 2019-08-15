@@ -17,7 +17,7 @@
             android:layout_marginEnd="16dp"
             android:id="@+id/cardView"
             app:layout_constraintHorizontal_bias="0.0"
-            app:cardBackgroundColor="#ccf8ffc4"
+            app:cardBackgroundColor="#6fffffff"
             app:cardCornerRadius="8dp" android:layout_marginTop="16dp"/>
 
     <de.hdodenhof.circleimageview.CircleImageView

@@ -35,7 +35,7 @@
     <!--Add photo button-->
     <Button
             android:id="@+id/photo_profile_page"
-            android:layout_width="160dp"
+            android:layout_width="165dp"
             android:layout_height="160dp"
             android:layout_marginTop="90dp"
             android:background="@drawable/rounded_image"
@@ -50,24 +50,24 @@
 
     <Button
             android:text="Save Changes"
-            android:layout_width="197dp"
-            android:layout_height="65dp"
+            android:layout_width="199dp"
+            android:layout_height="68dp"
             android:gravity="center"
             android:id="@+id/save_changes_button_profile_page"
             android:textColor="#ffffff"
-            android:background="@drawable/profile_buttons1"
+            android:background="@drawable/profile_button_round_bottom_right"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/search_button_profile_page"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/inbox_button_profile_page"/>
 
     <Button
             android:id="@+id/inbox_button_profile_page"
-            android:layout_width="200dp"
+            android:layout_width="202dp"
             android:layout_height="71dp"
             android:paddingRight="32dp"
             android:text="INBOX"
             android:textColor="#ffffff"
-            android:background="@drawable/profile_buttons1"
+            android:background="@drawable/profile_button_round_bottom_right"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2__profile_page"
     />
@@ -76,7 +76,7 @@
             android:id="@+id/search_button_profile_page"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/profile_buttons1"
+            android:background="@drawable/profile_button_round_bottom_left"
             android:paddingLeft="32dp"
             android:text="SEARCH"
             android:textColor="#ffffff"
