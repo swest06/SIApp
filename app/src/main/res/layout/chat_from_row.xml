@@ -17,7 +17,7 @@
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
     <TextView
-            android:background="@drawable/round_edittext"
+            android:background="@drawable/chat_bubble"
             android:padding="16dp"
             android:text="Message goes here"
             android:layout_width="240dp"
