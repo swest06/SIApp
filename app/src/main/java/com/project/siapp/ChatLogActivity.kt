@@ -52,8 +52,13 @@ class ChatLogActivity : AppCompatActivity() {
     }
 
     private fun listenForMessages(){
+
+        //user Id's. Make global variable later!
+        val fromId = FirebaseAuth.getInstance().uid
+        val toId = user?.uid
+
         //Database reference
-        val ref = FirebaseDatabase.getInstance().getReference("messages")
+        val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId")
 
         //listens for changes to messages child nodes
         ref.addChildEventListener(object: ChildEventListener{
@@ -97,8 +102,8 @@ class ChatLogActivity : AppCompatActivity() {
     }
 
     private fun sendMessage() {
-        //Database reference
-        val ref = FirebaseDatabase.getInstance().getReference("/messages").push()
+        //Original Database reference
+//        val ref = FirebaseDatabase.getInstance().getReference("/messages").push()
 
         //Parameters to be passed into message constructor
         val text = editText_chat_log.text.toString()
@@ -106,13 +111,43 @@ class ChatLogActivity : AppCompatActivity() {
         val toId = user.uid
         val timeStamp = System.currentTimeMillis() / 1000
 
-        val message = Message(ref.key!!, text, fromId!!, toId!!, timeStamp)
+        //check
+        if (fromId == null) {
+            return
+        }
 
-        //save message object to messages node in database
-        ref.setValue(message)
+        //Database reference that creates new nodes for each new chats
+        val ref1 = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
+        val ref2 = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
+        val inboxRef1 = FirebaseDatabase.getInstance().getReference("/inbox/$fromId/$toId")
+        val inboxRef2 = FirebaseDatabase.getInstance().getReference("/inbox/$toId/$fromId")
+
+        val message = Message(ref1.key!!, text, fromId!!, toId!!, timeStamp)
+
+        //save message object to messages node in database (USER 1)
+        ref1.setValue(message)
             .addOnSuccessListener {
-                Log.d(TAG, "Message saved to database: ${ref.key}")
+                Log.d(TAG, "Message saved to 1st database ref: ${ref1.key}")
+
+                //clear text from editText
+                editText_chat_log.text.clear()
+
+                //scrolls to last message sent
+                reyclerView_chat_log.scrollToPosition(adapter.itemCount - 1)
             }
+            .addOnFailureListener {
+                //ADD A TOAST (MESSAGE COULD NOT BE SENT) WHEN YOU HAVE TIME!
+            }
+
+        //save message object to messages node in database (USER 2)
+        ref2.setValue(message)
+            .addOnSuccessListener {
+                Log.d(TAG, "Message saved to 2nd database ref: ${ref2.key}")
+            }
+
+        //save messages to inbox node (Set on successlistenrs etc if have time)
+        inboxRef1.setValue(message)
+        inboxRef2.setValue(message)
     }
 }
 

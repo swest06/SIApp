@@ -28,6 +28,14 @@ class OtherUserProfileActivity : AppCompatActivity() {
 
     val photoButton by lazy { findViewById<Button>(R.id.photo_other_user_profile) }
 
+    //dummy text for testing.
+    val dummyText: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor" +
+            "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation\n" +
+            "    ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit\n" +
+            "    in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat\n" +
+            "    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+
 
 
     //constants to pass to intents (may just end up using user id)
@@ -76,7 +84,14 @@ class OtherUserProfileActivity : AppCompatActivity() {
         location_textView_other_user_profile.setText(userLocation)
         age_textView_other_user_profile.setText(userAge)
         gender_textView_other_user_profile.setText(userGender)
-        aboutInfo_textView_other_user_profile.setText(userAbout)
+
+        //Only for testing purposes. Delete for production
+        if (!userAbout.isEmpty() || null != userAbout){
+            aboutInfo_textView_other_user_profile.setText(userAbout)
+        } else {
+            aboutInfo_textView_other_user_profile.setText(dummyText)
+        }
+
 
         //Try to load photo into image view
         val circleImageView = circle_image_view_other_user_profile
