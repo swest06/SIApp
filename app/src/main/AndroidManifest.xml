@@ -12,9 +12,12 @@
 
         <activity android:name=".ChatLogActivity">
             <!-- Adds back button to action bar -->
+            <!--Should go here but currently causes crash-->
+            <!--android:value=".OtherUserProfileActivity"-->
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".OtherUserProfileActivity"/>
+                    android:value=".SearchActivity"
+            />
         </activity>
 
         <activity android:name=".OtherUserProfileActivity">
