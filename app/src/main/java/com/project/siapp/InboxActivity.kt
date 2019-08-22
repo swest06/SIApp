@@ -1,10 +1,13 @@
 package com.project.siapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
@@ -23,12 +26,22 @@ class InboxActivity : AppCompatActivity() {
         setContentView(R.layout.activity_inbox)
         supportActionBar?.title = "Inbox"
 
-
+        //set recycler view adapter
+        recycler_view_inbox.adapter = adapter
+        recycler_view_inbox.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
         listenForMessages()
 
-        //set recycler view adapter
-        recycler_view_inbox.adapter = adapter
+        adapter.setOnItemClickListener { item, view ->
+
+            val intent = Intent(this, ChatLogActivity::class.java)
+
+            val row = item as InboxRow
+
+            intent.putExtra(SearchActivity.USER_KEY, row.otherUser)
+            startActivity(intent)
+        }
+
     }
     private fun refreshRecycler(){
         Log.d(TAG, "Inside refreshRecycler")
@@ -78,6 +91,8 @@ class InboxActivity : AppCompatActivity() {
 
 
     class InboxRow(val message: Message): Item<ViewHolder>(){
+        var otherUser: User? = null
+
         override fun getLayout(): Int {
             return R.layout.inbox_row
         }
@@ -101,11 +116,13 @@ class InboxActivity : AppCompatActivity() {
                 }
 
                 override fun onDataChange(p0: DataSnapshot) {
-                    val user = p0.getValue(User::class.java)
-                    viewHolder.itemView.username_textview_inbox_row.text = user?.name
+                    otherUser = p0.getValue(User::class.java)
+                    viewHolder.itemView.username_textview_inbox_row.text = otherUser?.name
+
+                    val imageView = viewHolder.itemView.imageview_inbox
+                    Picasso.get().load(otherUser?.photo).into(imageView)
                 }
             })
-
 
         }
 
