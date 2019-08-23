@@ -20,6 +20,13 @@
             />
         </activity>
 
+        <activity android:name=".GroupActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".SearchActivity"
+            />
+        </activity>
+
         <activity android:name=".OtherUserProfileActivity">
             <!-- Adds back button to action bar -->
             <meta-data

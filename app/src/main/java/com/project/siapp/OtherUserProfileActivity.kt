@@ -27,6 +27,7 @@ class OtherUserProfileActivity : AppCompatActivity() {
     val userAbout by lazy { intent.getStringExtra(SearchActivity.USER_ABOUT) }
 
     val photoButton by lazy { findViewById<Button>(R.id.photo_other_user_profile) }
+    val groupButton by lazy { findViewById<Button>(R.id.add_to_group_button_other_user_profile) }
 
     //dummy text for testing.
     val dummyText: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor" +
@@ -64,6 +65,12 @@ class OtherUserProfileActivity : AppCompatActivity() {
         //Start chat log
         messageButton.setOnClickListener {
             startChatLog()
+        }
+
+        groupButton.setOnClickListener {
+            val intent = Intent(this, GroupActivity::class.java)
+            Log.d(TAG, "Inside group button click listener")
+            startActivity(intent)
         }
     }
 
