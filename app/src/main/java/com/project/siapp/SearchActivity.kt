@@ -35,16 +35,6 @@ class SearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search)
         supportActionBar?.title = "Search Users"
 
-//        //setup adapter. Might need to make a custom adapter class that extends RecyclerView.Adapter<ViewHolder>
-//        val adapter = GroupAdapter<ViewHolder>()
-//
-//        //Adding each profile snippet to recycler view(for testing purposes. Put in loop later)
-//        adapter.add(ProfileSnippet())
-//        adapter.add(ProfileSnippet())
-//        adapter.add(ProfileSnippet())
-//        adapter.add(ProfileSnippet())
-//
-//        recycler_view_search.adapter = adapter
         recycler_view_search.layoutManager = LinearLayoutManager(this) //can be added in xml instead
 
         //Retrieve user data

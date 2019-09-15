@@ -228,7 +228,6 @@ class ProfilePageActivity: AppCompatActivity() {
                 ref.downloadUrl.addOnSuccessListener {
                     Log.d(TAG, "Storage location $it")
 
-
                     //try this to add photo to user's node
                     val id = FirebaseAuth.getInstance().uid ?: ""
                     val userPhotoReference = FirebaseDatabase.getInstance().getReference("/users/$id/photo")
@@ -254,28 +253,6 @@ class ProfilePageActivity: AppCompatActivity() {
                             }
                         }
 
-
-
-                    //DELETE AFTER!
-                    //experimental user update code(NEEDS TESTING!)
-//                    val user = FirebaseAuth.getInstance().currentUser
-//                    if (user != null) {
-//
-//                        // User is signed in
-//                        val profileUpdates = UserProfileChangeRequest.Builder()
-//                            .setPhotoUri(photoUri)
-//                            .build()
-//
-//                        //code from firebase.google (May need refactoring)
-//                        user?.updateProfile(profileUpdates)
-//                            ?.addOnCompleteListener { task ->
-//                                if (task.isSuccessful) {
-//                                    Log.d(TAG, "User profile updated.")
-//                                }
-//                            }
-//                    } else {
-//                        // No user is signed in
-//                    }
                 }
             }
     }

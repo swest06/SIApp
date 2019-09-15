@@ -73,8 +73,12 @@ class LoginActivity: AppCompatActivity() {
             .addOnCompleteListener {
                 if (!it.isSuccessful){
                     Log.d(TAG, "Unsuccessful login")
+                    toast.setText("Login Unsuccessful")
+                    toast.show()
                     return@addOnCompleteListener
                 } else{
+                    toast.setText("Logging In...")
+                    toast.show()
                     Log.d(TAG, "Successful login")
                     Log.d(TAG, "User ID: ${it.result?.user?.uid}")
 
