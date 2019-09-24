@@ -4,7 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -14,7 +18,11 @@ import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity : AppCompatActivity() {
+    private val searchButton by lazy { findViewById<Button>(R.id.button_search) }
+    private lateinit var searchString: String
+    private lateinit var toast: Toast
     private val TAG = "SearchActivity"
+    val adapter = GroupAdapter<ViewHolder>()
 
     //constants to pass to intents (may just end up using user id)
     companion object{
@@ -33,12 +41,17 @@ class SearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
-        supportActionBar?.title = "Search Users"
+        supportActionBar?.title = "Users"
 
         recycler_view_search.layoutManager = LinearLayoutManager(this) //can be added in xml instead
-
+        recycler_view_search.adapter = adapter
         //Retrieve user data
         retrieveUsers()
+
+        //Search button
+        searchButton.setOnClickListener {
+            search()
+        }
     }
 
 
@@ -48,14 +61,22 @@ class SearchActivity : AppCompatActivity() {
 
             //called once all users in db have been retrieved
             override fun onDataChange(snapshot: DataSnapshot) {
-                val adapter = GroupAdapter<ViewHolder>()
+//                val adapter = GroupAdapter<ViewHolder>()
 
                 //for each user retrieved add a new profile snippet to the group adapter that will be rendered in the recycler view
                 snapshot.children.forEach{
                     Log.d(TAG, it.toString())
                     val user = it.getValue(User::class.java)
-                    if  (user != null){
-                        adapter.add(ProfileSnippet(user))
+                    if  (user != null && user.uid != FirebaseAuth.getInstance().currentUser!!.uid){
+
+                        if (::searchString.isInitialized){
+                            if  (user.location.contains(searchString, ignoreCase = true)){
+                                adapter.add(ProfileSnippet(user))
+                            }
+                            
+                        } else {
+                            adapter.add(ProfileSnippet(user))
+                        }
                     }
                 }
 
@@ -81,12 +102,30 @@ class SearchActivity : AppCompatActivity() {
                 }
 
 
-                recycler_view_search.adapter = adapter
+//                recycler_view_search.adapter = adapter
             }
 
             override fun onCancelled(p0: DatabaseError) {
             //TODO
             }
         })
+    }
+
+    private fun search(){
+        toast = getToast(this@SearchActivity)
+        toast.setText("Searching...")
+        toast.show()
+
+        searchString = findViewById<EditText>(R.id.editText_search).text.toString()
+        editText_search.text.clear()
+        Log.d(TAG, searchString)
+
+        refreshRecycler()
+
+    }
+
+    private fun refreshRecycler(){
+        adapter.clear()
+        retrieveUsers()
     }
 }
