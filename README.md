@@ -14,11 +14,14 @@
 * Java
 * Firebase
 
-### Sign up
-![alt text](https://github.com/swest06/SIApp/blob/master/si_images/si_1.PNG "sign up page")
+### Sign up & Login
+![alt text](https://github.com/swest06/SIApp/blob/master/si_images/signup.png "sign up page") ![alt text](https://github.com/swest06/SIApp/blob/master/si_images/login.png "login page")
 
-### Login
-![alt text](https://github.com/swest06/SIApp/blob/master/si_images/login.png "login page")
 
 ### Profile Page Creator
-![alt text](https://github.com/swest06/SIApp/blob/master/si_images/si_4.PNG "profile page")
+![alt text](https://github.com/swest06/SIApp/blob/master/si_images/profile1.png "profile page") ![alt text](https://github.com/swest06/SIApp/blob/master/si_images/profile2.png "profile page")
+
+### Contacts & Chat Logs
+![alt text](https://github.com/swest06/SIApp/blob/master/si_images/message2.png "Contacts") ![alt text] (https://github.com/swest06/SIApp/blob/master/si_images/message1.png "Chat log")
+
+
