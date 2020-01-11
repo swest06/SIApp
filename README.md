@@ -22,6 +22,6 @@
 ![alt text](https://github.com/swest06/SIApp/blob/master/si_images/profile1.png "profile page") ![alt text](https://github.com/swest06/SIApp/blob/master/si_images/profile2.png "profile page")
 
 ### Contacts & Chat Logs
-![alt text](https://github.com/swest06/SIApp/blob/master/si_images/message2.png "Contacts") ![alt text] (https://github.com/swest06/SIApp/blob/master/si_images/message1.png "Chat log")
+![alt text](https://github.com/swest06/SIApp/blob/master/si_images/message2.png "Contacts") ![alt text](https://github.com/swest06/SIApp/blob/master/si_images/message1.png "Chat log")
 
 
