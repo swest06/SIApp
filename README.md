@@ -14,6 +14,8 @@
 * Java
 * Firebase
 
-### Sign up & Login
+### Sign up
 ![alt text](https://github.com/swest06/SIApp/blob/master/si_images/si_1.PNG "sign up page")
+
+### Login
 ![alt text](https://github.com/swest06/SIApp/blob/master/si_images/login.png "login page")
