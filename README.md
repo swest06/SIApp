@@ -7,3 +7,8 @@ Native android application for mobiles that allows users to instantly message ea
 * Profile page creation and modification. 
 * Photo uploads.
 * Real-time Instant messaging.
+
+## Technology Stack:
+* Kotlin
+* Java
+* Firebase
