@@ -24,4 +24,7 @@
 ### Contacts & Chat Logs
 ![alt text](https://github.com/swest06/SIApp/blob/master/si_images/message2.png "Contacts") ![alt text](https://github.com/swest06/SIApp/blob/master/si_images/message1.png "Chat log")
 
+### Search Users by Location
+![alt text](https://github.com/swest06/SIApp/blob/master/si_images/si_5.PNG "User Search")
+
 
