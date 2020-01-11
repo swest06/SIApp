@@ -1,6 +1,6 @@
 # SI (Social Inclusion) App
 Native android application for mobiles that allows users to instantly message eachother in real-time.
-![alt-text](https://github.com/swest06/SIApp/blob/master/si_images/si_op1.png "SI App)
+![alt-text](https://github.com/swest06/SIApp/blob/master/si_images/si_op1.png "SI App")
 
 ## Features:
 * Login and registration with email and password.
