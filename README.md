@@ -1,4 +1,5 @@
 # Messaging App
+
 ##### Native android application for mobiles that allows users to instantly message eachother in real-time.
 ![alt-text](https://github.com/swest06/SIApp/blob/master/si_images/si_op1.png "SI App")
 
